@@ -1,0 +1,15 @@
+# Python
+__pycache__/
+*.pyc
+.pytest_cache/
+*.egg-info/
+
+# Local runtime data (Parquet volume + SQLite)
+/data/
+*.db
+*.db-wal
+*.db-shm
+
+# Editor / OS
+.venv/
+.DS_Store

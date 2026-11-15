@@ -1,0 +1,21 @@
+services:
+  api:
+    build: .
+    image: battery-schema-registry:1.0.0
+    container_name: battery-schema-registry
+    ports:
+      - "8000:8000"
+    environment:
+      DATA_DIR: /data
+    volumes:
+      - battery_data:/data
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request,sys; sys.exit(0 if urllib.request.urlopen('http://127.0.0.1:8000/health', timeout=3).status==200 else 1)"]
+      interval: 15s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+
+volumes:
+  battery_data:
